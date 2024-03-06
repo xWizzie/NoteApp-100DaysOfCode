@@ -4,11 +4,7 @@ function Note({ id, title, content, createdAt, onDelete }) {
   const [done, setDone] = useState(false);
 
   const markDone = () => {
-    if (done) {
-      setDone(false);
-    } else {
-      setDone(true);
-    }
+    setDone(!done);
   };
 
   return (
@@ -28,7 +24,7 @@ function Note({ id, title, content, createdAt, onDelete }) {
 
         <div className="d-flex justify-content-between align-content-center">
           <button className="btn btn-primary" onClick={markDone}>
-            Mak Done
+            {done ? "Mark Not Done" : "Mark Done"}
           </button>
 
           {done ? (

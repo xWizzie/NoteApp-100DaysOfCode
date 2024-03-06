@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 // Note object template
 class Note {
@@ -47,6 +48,17 @@ app.delete("/api/:id", (req, res) => {
   } else {
     res.status(404).send("Note not found");
   }
+});
+
+let nextId = notesArray.length + 1;
+
+app.post("/api/add", (req, res) => {
+  const { title, content } = req.body;
+  const createdAt = new Date();
+  const newNote = new Note(nextId, title, content, createdAt);
+  notesArray.push(newNote);
+  nextId++;
+  res.json(notesArray);
 });
 
 app.listen(5000, () => {
